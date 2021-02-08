@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import firebase from "firebase/app";
+import 'firebase/firestore';
+import 'firebase/auth';
+import Login from './Login.js';
+import Nav from './Nav.js';
+import React from "react";
+import {DbProvider} from './Ctx.js'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [log,setLog] = useState(false);
+
+  if(log == true)
+  {
+  return <DbProvider ><Nav/></DbProvider>
+  }
+  else
+  {
+  return   <DbProvider  > <Login setLog={setLog}></Login>  </DbProvider>
+  }
+
 }
+
 
 export default App;
